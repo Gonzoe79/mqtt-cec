@@ -67,7 +67,7 @@ async.series([
               break;
           }
 
-          if(lastState.power[id] !== state && new Date() - (lastPowerCmdTime[id] || 0) > config.powerCmdWaitMs) {
+          if(new Date() - (lastPowerCmdTime[id] || 0) > config.powerCmdWaitMs) {
             console.log('publishing new state for ' + config.idMap[id].rootTopic + '/power : ' + state);
             mqttClient.publish(config.idMap[id].rootTopic + '/power', state, {retain: true});
           }
